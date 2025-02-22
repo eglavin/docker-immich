@@ -5,7 +5,7 @@ services:
     container_name: immich_server
     image: ghcr.io/immich-app/immich-server:${IMMICH_VERSION:-release}
     extends:
-    #   file: hwaccel.transcoding.yml
+      file: hwaccel.transcoding.yml
       service: quicksync # set to one of [nvenc, quicksync, rkmpp, vaapi, vaapi-wsl] for accelerated transcoding
     volumes:
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
@@ -62,7 +62,7 @@ services:
         echo "checksum failure count is $$Chksum";
         [ "$$Chksum" = '0' ] || exit 1
       interval: 5m
-      start_interval: 30s
+      # start_interval: 30s
       start_period: 5m
     command: >-
       postgres
